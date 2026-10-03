@@ -40,7 +40,7 @@ export const App: React.FC = () => {
 
   const fetchDocuments = async () => {
     try {
-      const resp = await fetch('/api/documents');
+      const resp = await fetch('https://ai-docstudy-research.onrender.com/api/documents');
       if (resp.ok) {
         const data: DocumentItem[] = await resp.json();
         setDocuments(data);
@@ -60,7 +60,7 @@ export const App: React.FC = () => {
 
   const fetchHistory = async () => {
     try {
-      const resp = await fetch('/api/history');
+      const resp = await fetch('https://ai-docstudy-research.onrender.com/api/history');
       if (resp.ok) {
         const data: HistoryData = await resp.json();
         setHistory(data);
@@ -90,7 +90,7 @@ export const App: React.FC = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-      const resp = await fetch('/api/documents/upload', {
+      const resp = await fetch('https://ai-docstudy-research.onrender.com/api/documents/upload', {
         method: 'POST',
         body: formData,
       });
@@ -112,7 +112,7 @@ export const App: React.FC = () => {
     if (!window.confirm('Are you sure you want to delete this document?')) return;
 
     try {
-      const resp = await fetch(`/api/documents/${id}`, {
+      const resp = await fetch(`https://ai-docstudy-research.onrender.com/api/documents/${id}`, {
         method: 'DELETE',
       });
       if (resp.ok) {
@@ -125,7 +125,7 @@ export const App: React.FC = () => {
   };
 
   const handleExecuteResearch = async (prompt: string, docIds: string[]): Promise<SingleQuestionAnswer[]> => {
-    const resp = await fetch('/api/research/query', {
+    const resp = await fetch('https://ai-docstudy-research.onrender.com/api/research/query', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question: prompt, document_ids: docIds }),
@@ -142,7 +142,7 @@ export const App: React.FC = () => {
   };
 
   const handleGenerateAINotes = async (topic: string): Promise<StudyNote> => {
-    const resp = await fetch('/api/notes/ai', {
+    const resp = await fetch('https://ai-docstudy-research.onrender.com/api/notes/ai', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ topic }),
@@ -180,7 +180,7 @@ export const App: React.FC = () => {
 
   const handleDeleteResearchHistory = async (id: string) => {
     try {
-      const resp = await fetch(`/api/history/research/${id}`, { method: 'DELETE' });
+      const resp = await fetch(`https://ai-docstudy-research.onrender.com/api/history/research/${id}`, { method: 'DELETE' });
       if (resp.ok) {
         setHistory((prev) => ({
           ...prev,
@@ -194,7 +194,7 @@ export const App: React.FC = () => {
 
   const handleDeleteNoteHistory = async (id: string) => {
     try {
-      const resp = await fetch(`/api/history/notes/${id}`, { method: 'DELETE' });
+      const resp = await fetch(`https://ai-docstudy-research.onrender.com/api/history/notes/${id}`, { method: 'DELETE' });
       if (resp.ok) {
         setHistory((prev) => ({
           ...prev,
@@ -209,7 +209,7 @@ export const App: React.FC = () => {
   const handleClearAllHistory = async () => {
     if (!window.confirm('Are you sure you want to clear all history?')) return;
     try {
-      const resp = await fetch('/api/history', { method: 'DELETE' });
+      const resp = await fetch('https://ai-docstudy-research.onrender.com/api/history', { method: 'DELETE' });
       if (resp.ok) {
         setHistory({ research: [], notes: [] });
       }
