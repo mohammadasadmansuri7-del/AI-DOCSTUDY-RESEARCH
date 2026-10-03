@@ -1,73 +1,46 @@
 # 📚 AI DocStudy & Research Platform
 
-An end-to-end, high-performance academic research and grounded document analysis platform. Built with a decoupled architecture featuring a **FastAPI** backend powering strict Retrieval-Augmented Generation (RAG) and ultra-fast structured notes generation, paired with a modern **React/Vite** frontend.
+🔗 **Live Website:** [https://ai-docstudy-research.vercel.app](https://ai-docstudy-research.vercel.app)  
+🔗 **API Docs:** [https://ai-docstudy-research.onrender.com/docs](https://ai-docstudy-research.onrender.com/docs)
 
 ---
 
-## 🌐 Live Deployments
-
-- **Live Application:** [ai-docstudy-research.vercel.app](https://ai-docstudy-research.vercel.app)
-- **Interactive API Documentation (Swagger):** [ai-docstudy-research.onrender.com/docs](https://ai-docstudy-research.onrender.com/docs)
-- **Backend Health Check:** [ai-docstudy-research.onrender.com/api/health](https://ai-docstudy-research.onrender.com/api/health)
-
----
-
-## ✨ Key Features
-
-### 1. Document Research Engine (Strict Grounded RAG)
-- Multi-format ingestion supporting **PDF, DOCX, PPTX, TXT, and MD** files.
-- Vectorized chunk retrieval via local high-speed vector embeddings.
-- Zero-hallucination policy: answers are strictly grounded within selected documents, providing transparent citations and fallback notifications when evidence is missing.
-
-### 2. AI Study Notes Engine
-- High-throughput structured academic notes generation.
-- Formats outputs into an exam-oriented 9-part breakdown including:
-  - Executive Overview
-  - Deep-dive Core Concepts
-  - Mathematical Formulations & Syntax Examples
-  - Comparative Analysis
-  - Real-World Industry Applications
-  - Edge Cases & Common Pitfalls
-  - Summary & Quick Reference
-
-### 3. Session & Query Persistence
-- Real-time research history tracking.
-- Contextual deletion and granular history management.
+### 🌟 Key Features
+- **Strict Grounded Document Research (Zero Hallucination RAG):** PDF, DOCX, PPTX, TXT aur MD files ko ingest karke exact context-based answers deta hai. Agar document me proof nahi milta, toh galat jawab dene ke bajaye saaf bata deta hai ki context missing hai.
+- **Automated 9-Part AI Study Notes Engine:** Kisi bhi complex topic par exam-ready structured study notes generate karta hai (Overview, Core Concepts, Formulas/Syntax, Comparison Matrix, Industry Applications, Edge Cases, Glossary, Practice Problems, aur Quick Revision).
+- **Multi-Format Document Parsing:** Badi books, technical manuals aur slides ko split karke semantic chunks me convert karta hai.
+- **Query & Document History Management:** Search history aur uploaded files ka real-time tracking aur instant delete control.
 
 ---
 
-## 🛠️ Architecture & Tech Stack
-┌─────────────────────────────────┐
-│     React + Vite Frontend       │  <── Deployed on Vercel
-│   (Tailwind CSS, TypeScript)    │
-└────────────────┬────────────────┘
-│ REST API (JSON)
-┌────────────────▼────────────────┐
-│        FastAPI Backend          │  <── Deployed on Render
-│  (Uvicorn, Pydantic, Python)    │
-└───────┬─────────────────┬───────┘
-│                 │
-┌───────▼───────┐ ┌───────▼───────────┐
-│ Vector Store  │ │ LLM Engine        │
-│  (FastEmbed)  │ │ (Groq / NVIDIA)   │
-└───────────────┘ └───────────────────┘
+### 💼 Real-World Applications
+- **EdTech & Exam Preparation:** Students badi textbooks upload karke fast revision aur structured notes bana sakte hain.
+- **Legal & Compliance Analysis:** Contracts aur legal agreements se exact clauses aur penalties bina hallucination ke verify karne ke liye.
+- **Tech Documentation Search:** Developers ke liye heavy API manuals aur technical specs se syntax aur logic dhoondhne ke liye.
+- **Medical & Clinical Research:** Clinical trial papers se exact findings extract karne ke liye jahan accuracy 100% zaroori hoti hai.
 
+---
 
+### 💎 Business & Technical Value
+- **Zero Hallucination:** Normal AI chatbots ki tarah fake ya guess kiye hue jawab nahi deta; har answer document proof ke sath hota hai.
+- **Time Saving:** Ghanton ka reading work kuch seconds ke automated semantic retrieval me badal deta hai.
+- **Resource Efficiency:** ONNX Runtime aur FastEmbed use karne ki wajah se heavy GPU ke bina low-memory servers (512MB RAM) par bhi high speed se run karta hai.
+
+---
+
+### ⚙️ How It Was Created
+1. **Document Ingestion & Chunking:** PyPDF, python-docx aur python-pptx se text extract karke overlapping context windows banayi gayi.
+2. **Local Vector Embeddings:** FastEmbed (ONNX Runtime) ke through text ko fast mathematical vectors me convert kiya.
+3. **Similarity Search:** User ke sawal aur document chunks ke beech semantic cosine similarity match ki gayi.
+4. **Strict LLM Orchestration:** High-speed LLM engine (Groq / NVIDIA) ko strict context grounding prompts ke sath connect kiya gaya.
+5. **Decoupled Architecture:** Modern React/Vite UI ko FastAPI backend ke sath connect karke Vercel aur Render par deploy kiya gaya.
+
+---
+
+### 🛠️ Tech Stack Used
 - **Frontend:** React 18, Vite, TypeScript, Tailwind CSS, Lucide Icons
-- **Backend:** FastAPI, Python 3.11+, Uvicorn, Pydantic v2
-- **Embeddings & Vector Search:** FastEmbed (ONNX Runtime-based for ultra-low memory footprint), Qdrant Client
-- **Document Extractors:** `pypdf`, `python-docx`, `python-pptx`
-- **Hosting & Infrastructure:** Vercel (Edge CDN Frontend), Render (Dockerized Web Service)
-
----
-
-## ⚡ Engineering Highlight: Memory Optimization on Low-Resource Runtimes
-
-During initial staging, standard HuggingFace/PyTorch dependencies (`torch`, `sentence-transformers`) resulted in container memory exhaustion on 512MB RAM free instances. 
-
-The inference engine was refactored to use **FastEmbed (ONNX Runtime)**:
-- **RAM Footprint:** Reduced from **1.2 GB+ down to < 200 MB**.
-- **Cold-Start Time:** Decreased by over **65%**.
-- **Embedding Throughput:** Near-instant vector operations without requiring GPU compute.
-
----
+- **Backend:** FastAPI, Python, Uvicorn, Pydantic
+- **Vector Search & RAG:** FastEmbed (ONNX Runtime), Vector Indexing
+- **Document Processors:** PyPDF, python-docx, python-pptx
+- **LLM Inference:** Groq API / NVIDIA Inference Engine
+- **Hosting:** Vercel (Frontend) + Render (Backend)
