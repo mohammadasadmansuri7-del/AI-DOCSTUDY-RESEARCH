@@ -1,0 +1,28 @@
+﻿# Virtual Environments
+venv/
+backend/venv/
+env/
+.env
+
+# Database & Storage
+*.db
+docstudy.db
+storage/
+qdrant_data/
+qdrant_db/
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.class
+.pytest_cache/
+
+# System generated logs
+.system_generated/
+*.log
